@@ -1,10 +1,4 @@
 services:
-  # nginx:
-  #   image: nginx:alpine
-  #   environment:
-  #     - VIRTUAL_HOST=${DOMAIN}
-  #     - LETSENCRYPT_HOST=${DOMAIN}
-
   mail:
     image: analogic/poste.io
     hostname: ${MAIL_DOMAIN}
@@ -31,9 +25,6 @@ services:
       - /etc/localtime:/etc/localtime
       - ./data/mail:/data
       - ${PROXY_DATA}/html/.well-known:/opt/www/.well-known
-      # - ${PROXY_DATA}/acme/${DEFAULT_MAIL}/${MAIL_DOMAIN}/${MAIL_DOMAIN}.cer:/data/ssl/server.crt:ro
-      # - ${PROXY_DATA}/acme/${DEFAULT_MAIL}/${MAIL_DOMAIN}/${MAIL_DOMAIN}.key:/data/ssl/server.key:ro
-      # - ${PROXY_DATA}/acme/${DEFAULT_MAIL}/${MAIL_DOMAIN}/ca.cer:/data/ssl/ca.crt:ro
       - ${PROXY_DATA}/certs/${MAIL_DOMAIN}/cert.pem:/data/ssl/server.crt:ro
       - ${PROXY_DATA}/certs/${MAIL_DOMAIN}/key.pem:/data/ssl/server.key:ro
       - ${PROXY_DATA}/certs/${MAIL_DOMAIN}/chain.pem:/data/ssl/ca.crt:ro
